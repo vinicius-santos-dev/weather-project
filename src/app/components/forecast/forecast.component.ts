@@ -6,7 +6,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { Forecast, SimpleForecast } from '../../models';
+import { Forecast, SimpleForecast, Temps } from '../../models';
 import { GeneralInfo } from '../../models/general-info.model';
 
 @Component({
@@ -21,7 +21,6 @@ export class ForecastComponent implements OnChanges {
 
   public now = new Date();
   public filteredForecastList: GeneralInfo[] = [];
-  public firstItemsOfEachDay: GeneralInfo[] = [];
   public simpleForecasts: SimpleForecast[] = [];
 
   constructor() {}
@@ -29,8 +28,7 @@ export class ForecastComponent implements OnChanges {
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['forecast'] && changes['forecast'].currentValue) {
       this.filterForecastList(this.forecast.list);
-      this.getFirstItemOfEachDay(this.filteredForecastList);
-      this.setSimpleForecasts(this.firstItemsOfEachDay);
+      this.getMaxAndMinTemp(this.filteredForecastList);
     }
   }
 
@@ -46,36 +44,23 @@ export class ForecastComponent implements OnChanges {
     });
   }
 
-  public getFirstItemOfEachDay(forecastList: GeneralInfo[]): void {
-    this.firstItemsOfEachDay = forecastList?.reduce(
-      (firstItems: GeneralInfo[], currentForecast, index) => {
-        const previousForecastDate =
-          index > 0 ? new Date(forecastList[index - 1].dt_txt) : null;
-        const currentForecastDate = new Date(currentForecast.dt_txt);
+  public getMaxAndMinTemp(forecastList: GeneralInfo[]): void {
+    const maxTemps = this.calculateTemps(forecastList, 'max');
+    const minTemps = this.calculateTemps(forecastList, 'min');
 
-        if (
-          index === 0 ||
-          (previousForecastDate &&
-            this.formatDate(previousForecastDate) !==
-              this.formatDate(currentForecastDate))
-        ) {
-          firstItems.push(currentForecast);
-        }
+    this.setSimpleForecasts(maxTemps, minTemps);
 
-        return firstItems;
-      },
-      []
-    );
-
-    // console.log('FIRST ITEMS OF EACH DAY', this.firstItemsOfEachDay);
+    // console.log(this.simpleForecasts);
   }
 
-  public setSimpleForecasts(forecastList: GeneralInfo[]): void {
-    this.simpleForecasts = forecastList?.map((forecast) => {
-      const icon = forecast.weather[0].icon;
-      const date = this.formatForecastDate(new Date(forecast.dt_txt));
-      const maxTemp = this.convertKelvinToCelsius(forecast.main.temp_max);
-      const minTemp = this.convertKelvinToCelsius(forecast.main.temp_min);
+
+
+  public setSimpleForecasts(maxTemps: Temps, minTemps: Temps): void {
+    this.simpleForecasts = Object.keys(maxTemps).map((date) => {
+      let { temp: maxTemp, icon } = maxTemps[date];
+      let { temp: minTemp } = minTemps[date];
+
+      icon = icon.includes('n') ? icon.replace('n', 'd') : icon;
 
       return {
         icon,
@@ -84,15 +69,43 @@ export class ForecastComponent implements OnChanges {
         date,
       };
     });
+  }
+
+  private calculateTemps(
+    forecastList: GeneralInfo[],
+    type: 'max' | 'min'
+  ): Temps {
+    return forecastList?.reduce<Temps>((temps, forecast) => {
+      const forecastDate = this.formatForecastDate(new Date(forecast.dt_txt));
+      const temp = this.convertKelvinToCelsius(
+        type === 'max' ? forecast.main.temp_max : forecast.main.temp_min
+      );
+
+      const infos = {
+        icon: forecast.weather[0]?.icon,
+        date: forecastDate,
+        temp,
+      };
 
     // console.log('SIMPLE FORECASTS', this.simpleForecasts);
+      if (
+        !temps[forecastDate] ||
+        (type === 'max'
+          ? temp > temps[forecastDate]?.temp
+          : temp < temps[forecastDate]?.temp)
+      ) {
+        temps[forecastDate] = infos;
+      }
+
+      return temps;
+    }, {});
   }
 
   private formatDate(date: Date): string {
     return date.getDate().toString().padStart(2, '0');
   }
 
-  private formatHour(date: Date): string {
+  private formatHour(date: Date): string { 
     return date.getHours().toString().padStart(2, '0');
   }
 

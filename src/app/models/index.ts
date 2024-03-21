@@ -6,5 +6,6 @@ export * from './forecast.model';
 export * from './main.model';
 export * from './simple-forecast.model';
 export * from './sys.model';
+export * from './temps.model';
 export * from './weather.model';
 export * from './wind.model';
