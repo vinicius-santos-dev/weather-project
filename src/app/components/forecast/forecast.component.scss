@@ -1,0 +1,55 @@
+@import '../../../styles.scss';
+
+.c-forecast {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: $global-spacing-unit-medium;
+  background: rgba(0, 0, 0, 30%);
+  border-radius: $border-radius-sm;
+  color: $color-neutral-lightest;
+
+  @include mq($until: tablet) {
+    padding: $global-spacing-unit-small;
+  }
+
+  &__title {
+    font-size: $font-size-md;
+  }
+
+  &__items {
+    width: 100%;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: $global-spacing-unit-small;
+    border-radius: $border-radius-xs;
+    align-items: center;
+    cursor: default;
+
+    @include mq($until: tablet) {
+      padding: $global-spacing-unit-tiny;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 50%);
+      color: $color-neutral-darkest;
+    }
+
+    &-temp {
+      display: flex;
+      align-items: center;
+
+      &-image {
+        width: 40px;
+      }
+    }
+  }
+}

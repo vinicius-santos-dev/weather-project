@@ -1,0 +1,21 @@
+<div class="c-forecast">
+  <h1 class="c-forecast__title">Forecast</h1>
+
+  <div class="c-forecast__items">
+    @for(simpleForecast of simpleForecasts; track $index) {
+    <div class="c-forecast__item">
+      <div class="c-forecast__item-temp">
+        <img
+          class="c-forecast__item-temp-image"
+          src="../../../assets/images/weathers/{{ simpleForecast.icon }}.png"
+          alt="Weather Icon"
+        />
+        <p class="c-forecast__item-temp-text">
+          {{ simpleForecast.maxTemp }} °C / {{ simpleForecast.minTemp }} °C
+        </p>
+      </div>
+      <p class="c-forecast__item-date">{{ simpleForecast.date }}</p>
+    </div>
+    }
+  </div>
+</div>

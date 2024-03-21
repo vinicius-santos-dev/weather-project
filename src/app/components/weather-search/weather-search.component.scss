@@ -1,0 +1,64 @@
+@import "../../../styles.scss";
+
+.c-weather-search {
+  width: 100%;
+
+  &__form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__input {
+    border-radius: $border-radius-xs;
+    border: none;
+    outline: none;
+    padding: $global-spacing-unit-small;
+    font-family: $global-body-font;
+    margin-right: $global-spacing-unit-tiny;
+    background: rgba(0, 0, 0, 30%);
+    color: $color-neutral-lightest;
+    font-size: $font-size-xxs;
+
+    @include mq ($until: tablet) {
+      width: 100%;
+      flex: 1;
+      margin-right: $global-spacing-unit-small;
+    }
+
+    &::placeholder {
+      color: $color-neutral-medium;
+      font-size: $font-size-xxxs;
+    }
+  }
+
+  &__button {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $border-radius-pill;
+    background: rgba(0, 0, 0, 30%);
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    i {
+      font-size: $global-spacing-unit-medium;
+      color: $color-neutral-lightest;
+    }
+
+    &--loading {
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+

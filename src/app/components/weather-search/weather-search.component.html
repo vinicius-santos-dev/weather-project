@@ -1,0 +1,19 @@
+<div class="c-weather-search">
+  <form class="c-weather-search__form" [formGroup]="searchForm">
+    <input
+      class="c-weather-search__input"
+      name="location"
+      placeholder="Search for a location (ex: São Paulo, BR)"
+      type="text"
+      formControlName="location"
+    />
+
+    <button
+      [disabled]="!searchForm.valid || isLoading"
+      class="c-weather-search__button"
+      (click)="onSubmit()"
+    >
+      <i class="uil uil-search"></i>
+    </button>
+  </form>
+</div>

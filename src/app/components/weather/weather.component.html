@@ -1,0 +1,20 @@
+<div class="c-weather">
+  <div class="c-weather__header">
+    <app-weather-search
+      (cityEmitter)="handleCityEmitter($event)"
+      (forecastEmitter)="handleForecastEmitter($event)"
+      (isLoadingEmitter)="handleIsLoadingEmitter($event)"
+    />
+  </div>
+  <div class="c-weather__body" [class.c-weather__body--loading]="isLoading">
+    @if(!isLoading) {
+    <app-current-weather
+      [city]="city"  
+      (weatherChange)="handleWeatherChange($event)"
+    />
+    <app-forecast [forecast]="forecast" />
+    } @else {
+    <i class="uil uil-redo c-weather__loading"></i>
+    }
+  </div>
+</div>

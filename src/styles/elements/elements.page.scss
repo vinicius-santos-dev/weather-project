@@ -1,0 +1,184 @@
+@import "../settings/settings.scss";
+@import "../mq/mq.scss";
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
+  min-height: 100%;
+  background-color: #ffffff;
+  font-family: $global-body-font;
+  font-size: $font-size-xs;
+  color: $color-neutral-darkest;
+  -moz-osx-font-smoothing: grayscale; /* [1] */
+  -webkit-font-smoothing: antialiased; /* [1] */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: $color-brand-primary-medium;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+
+  transition: color $global-transition ease-in-out;
+
+  &:hover {
+    color: $color-brand-primary-medium;
+  }
+
+  &:active {
+    color: $color-brand-primary-dark;
+  }
+
+  figure & {
+    display: block;
+
+    &:hover {
+      color: currentColor;
+    }
+  }
+
+  h1 &,
+  h2 &,
+  h3 &,
+  h4 &,
+  h5 &,
+  h6 & {
+    color: $color-neutral-dark;
+
+    &:hover {
+      color: $color-brand-primary-medium;
+    }
+  }
+}
+
+p {
+  margin-bottom: $global-spacing-unit-small;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Simple default styles for headings 1 through 6. Anything more opinionated
+ * than simple font-size changes should likely be applied via classes (see:
+ * http://csswizardry.com/2016/02/managing-typography-on-large-apps/).
+ */
+
+// $global-alpha to $global-zeta font-size variables
+// are defined in 'settings/settings.global'.
+
+h1,
+.u-font-size-lg {
+  font-size: $font-size-lg;
+}
+
+h2,
+.u-font-size-md {
+  font-size: $font-size-md;
+}
+
+h3,
+.u-font-size-xs {
+  font-size: $font-size-sm;
+}
+
+h4,
+.u-font-size-xxs {
+  font-size: $font-size-xs;
+}
+
+h5,
+.u-font-size-xxxs {
+  font-size: $font-size-xxs;
+}
+
+.text-large,
+.text-medium,
+.text-normal,
+.text-small {
+  &-bold {
+    font-weight: bold;
+  }
+}
+
+.text-large {
+  font-size: $font-size-lg;
+}
+
+.text-medium {
+  font-size: $font-size-md;
+}
+
+p,
+.text-normal {
+  font-size: $font-size-xs;
+}
+
+.text-small {
+  font-size: $font-size-xxs;
+}
+
+@include mq($until: tablet) {
+  h1 {
+    font-size: $font-size-md;
+  }
+  h2 {
+    font-size: $font-size-md;
+  }
+  h3 {
+    font-size: $font-size-sm;
+  }
+  h4 {
+    font-size: $font-size-xxs;
+  }
+  h5 {
+    font-size: $font-size-xxxs;
+  }
+  .text-large {
+    font-size: $font-size-xxs;
+  }
+  .text-medium {
+    font-size: $font-size-xxxs;
+  }
+  p,
+  .text-normal {
+    font-size: $font-size-xxs;
+  }
+  .text-small {
+    font-size: $font-size-xxxs;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: $global-headings-font;
+  font-weight: bold;
+}
+
+main {
+  width: 100%;
+}
+
+// .c-input__icon {
+//   position: absolute;
+//   left: $global-spacing-unit-small;
+//   top: 50%;
+//   transform: translateY(-50%);
+// }

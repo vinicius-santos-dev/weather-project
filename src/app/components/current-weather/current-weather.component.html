@@ -1,0 +1,56 @@
+<div class="c-current-weather">
+  @if(city && city.main) {
+  <h1 class="c-current-weather__title">{{ city.name }}</h1>
+
+  <div class="c-current-weather__info">
+    <div class="c-current-weather__highlighted">
+      <img
+        src="../../../assets/images/weathers/{{ city.weather[0].icon }}.png"
+        alt="{{ city.weather[0].main }}"
+      />
+      <div class="c-current-weather__highlighted-texts">
+        <h2 class="c-current-weather__highlighted-title">
+          {{ temperatures.currentTemp }} °C
+        </h2>
+        <p class="c-current-weather__highlighted-subtitle">
+          {{ city.weather[0].main }}
+        </p>
+      </div>
+    </div>
+
+    <div class="c-current-weather__other-temps">
+      <p class="c-current-weather__other-temps-info">
+        {{ temperatures.maxTemp }} °C / {{ temperatures.minTemp }} °C 
+        (Feels like {{ temperatures.feelsLike }} °C)
+      </p>
+    </div>
+
+    <div class="c-current-weather__details">
+      <div class="c-current-weather__details-item">
+        <i class="c-current-weather__details-icon uil uil-water"></i>
+        <p class="c-current-weather__details-value">
+          {{ city.main.humidity }}%
+        </p>
+      </div>
+      <div class="c-current-weather__details-item">
+        <i class="c-current-weather__details-icon uil uil-wind"></i>
+        <p class="c-current-weather__details-value">
+          {{ city.wind.speed }} km/h
+        </p>
+      </div>
+      <div class="c-current-weather__details-item">
+        <i class="c-current-weather__details-icon uil uil-compress-v"></i>
+        <p class="c-current-weather__details-value">
+          {{ city.main.pressure }} mb
+        </p>
+      </div>
+      <div class="c-current-weather__details-item">
+        <i class="c-current-weather__details-icon uil uil-eye"></i>
+        <p class="c-current-weather__details-value">
+          {{ city.visibility / 1000 }} km
+        </p>
+      </div>
+    </div>
+  </div>
+  }
+</div>

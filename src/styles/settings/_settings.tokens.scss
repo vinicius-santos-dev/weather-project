@@ -1,0 +1,98 @@
+/** =================== TIPOGRAFIA =================== **/
+// font-family
+$global-headings-font: "Open Sans", georgia, "Times New Roman", serif;
+$global-body-font: Poppins, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// font-size
+$global-font-size: 16px;
+
+$font-size-xxxs: 12px;
+$font-size-xxs: 14px;
+$font-size-xs: 16px;
+$font-size-sm: 20px;
+$font-size-md: 24px;
+$font-size-lg: 32px;
+$font-size-xl: 40px;
+$font-size-xxl: 48px;
+$font-size-xxxl: 64px;
+$font-size-display: 80px;
+
+// font-weight
+$font-weight-hairline: 100;
+$font-weight-light: 200;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+
+/** =================== CORES =================== **/
+$color-background-dark: #202020;
+
+// brand colors
+$color-brand-primary-dark: #470FA3;
+$color-brand-primary-medium: #7831EC;
+$color-brand-primary-light: #9C52FF;
+
+$color-brand-secondary-dark: #AA40FF;
+$color-brand-secondary-medium: #C071FF;
+$color-brand-secondary-light: #E491FF;
+// #FFB2FF
+// neutral colors
+$color-neutral-darkest: #404040;
+$color-neutral-dark: #777777;
+$color-neutral-medium: #bababa;
+$color-neutral-light: #e0e0e0;
+$color-neutral-lightest: #ffffff;
+
+// feedback colors
+$color-feedback-success-medium: #6dca8b;
+$color-feedback-warning-medium: #ffb854;
+$color-feedback-error-medium: #e84155;
+
+/** =================== SOMBRAS =================== **/
+
+// box-shadow
+$shadow-level-1: 0px 0 6px rgba(71, 38, 38, 0.31);
+
+$shadow-level-2: 0px 64px 64px rgba(60, 60, 60, 0.05),
+  0px 32px 32px rgba(60, 60, 60, 0.05), 0px 16px 16px rgba(60, 60, 60, 0.05),
+  0px 8px 8px rgba(60, 60, 60, 0.05), 0px 4px 4px rgba(60, 60, 60, 0.05),
+  0px 2px 2px rgba(60, 60, 60, 0.05);
+
+/** =================== BORDAS =================== **/
+
+// border radius
+$border-radius-xxs: 5px;
+$border-radius-xs: 10px;
+$border-radius-sm: 20px;
+$border-radius-md: 30px;
+$border-radius-lg: 40px;
+$border-radius-pill: 50%;
+
+/** =================== ESPAÇAMENTOS =================== **/
+
+$global-baseline: 6px;
+
+$global-spacing-unit-tiny: $global-baseline;
+$global-spacing-unit-small: $global-baseline * 2;
+$global-spacing-unit-medium: $global-baseline * 4;
+
+$global-spacing-unit-large: $global-baseline * 6;
+$global-spacing-unit-huge: $global-baseline * 12;
+$global-spacing-unit: $global-spacing-unit-medium;
+
+/** =================== GRADIENTES =================== **/
+
+$gradient-primary: linear-gradient(to right, $color-brand-primary-dark, $color-brand-primary-light);
+$gradient-secondary: linear-gradient(to right, $color-brand-secondary-dark, $color-brand-secondary-light);
+$gradient-colors: linear-gradient(to right, $color-brand-primary-dark, $color-brand-secondary-light);
+
+/** =================== OUTROS =================== **/
+
+$global-transition: 0.3s;
+
+// Opacity
+
+$opacity-level-semiopaque: 50%;
+$opacity-level-medium: 30%;
+$opacity-level-light: 10%;
