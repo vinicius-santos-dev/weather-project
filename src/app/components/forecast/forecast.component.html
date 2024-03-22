@@ -11,7 +11,8 @@
           alt="Weather Icon"
         />
         <p class="c-forecast__item-temp-text">
-          {{ simpleForecast.maxTemp }} °C / {{ simpleForecast.minTemp }} °C
+          {{ simpleForecast.maxTemp }} °{{ currentUnit }} /
+          {{ simpleForecast.minTemp }} °{{ currentUnit }}
         </p>
       </div>
       <p class="c-forecast__item-date">{{ simpleForecast.date }}</p>

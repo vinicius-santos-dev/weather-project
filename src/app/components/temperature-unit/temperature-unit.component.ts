@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TemperatureUnitService } from '../../services/temperature-unit.service';
+import { UnsubscribeMixin } from '../../mixins';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-temperature-unit',
@@ -8,19 +11,34 @@ import { Component } from '@angular/core';
   templateUrl: './temperature-unit.component.html',
   styleUrl: './temperature-unit.component.scss',
 })
-export class TemperatureUnitComponent {
+export class TemperatureUnitComponent
+  extends UnsubscribeMixin
+  // implements OnInit
+{
   public temperatureUnits = [
     { name: 'Celsius', unit: 'C' },
     { name: 'Fahrenheit', unit: 'F' },
   ];
 
-  public currentUnit = 'C';
+  constructor(private temperatureUnitService: TemperatureUnitService) {
+    super();
+  }
 
-  constructor() {}
+  get currentUnit(): 'C' | 'F' {
+    return this.temperatureUnitService.getTemperatureUnit();
+  }
+
+  // ngOnInit(): void {
+  //   this.temperatureUnitService.temperatureUnit$
+  //     .pipe(takeUntil(this.unsubscribe$))
+  //     .subscribe((unit) => {
+  //       console.log('temperatureUnit', unit);
+  //     });
+  // }
 
   public changeTemperatureUnit(unit: string): void {
-    if (unit === this.currentUnit) return;
+    if (unit === this.temperatureUnitService.getTemperatureUnit()) return;
 
-    this.currentUnit = unit;
+    this.temperatureUnitService.setTemperatureUnit(unit as 'C' | 'F');
   }
 }

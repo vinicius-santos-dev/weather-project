@@ -8,6 +8,9 @@ import {
 } from '@angular/core';
 import { Forecast, SimpleForecast, Temps } from '../../models';
 import { GeneralInfo } from '../../models/general-info.model';
+import { TemperatureUnitService } from '../../services/temperature-unit.service';
+import { UnsubscribeMixin } from '../../mixins';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-forecast',
@@ -16,14 +19,31 @@ import { GeneralInfo } from '../../models/general-info.model';
   templateUrl: './forecast.component.html',
   styleUrl: './forecast.component.scss',
 })
-export class ForecastComponent implements OnChanges {
+export class ForecastComponent
+  extends UnsubscribeMixin
+  implements OnInit, OnChanges
+{
   @Input() public forecast: Forecast = {} as Forecast;
 
   public now = new Date();
   public filteredForecastList: GeneralInfo[] = [];
   public simpleForecasts: SimpleForecast[] = [];
 
-  constructor() {}
+  constructor(private temperatureUnitService: TemperatureUnitService) {
+    super();
+  }
+
+  get currentUnit(): 'C' | 'F' {
+    return this.temperatureUnitService.getTemperatureUnit();
+  }
+
+  ngOnInit(): void {
+    this.temperatureUnitService.temperatureUnit$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.getMaxAndMinTemp(this.filteredForecastList);
+      });
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['forecast'] && changes['forecast'].currentValue) {
@@ -53,8 +73,6 @@ export class ForecastComponent implements OnChanges {
     // console.log(this.simpleForecasts);
   }
 
-
-
   public setSimpleForecasts(maxTemps: Temps, minTemps: Temps): void {
     this.simpleForecasts = Object.keys(maxTemps).map((date) => {
       let { temp: maxTemp, icon } = maxTemps[date];
@@ -77,7 +95,7 @@ export class ForecastComponent implements OnChanges {
   ): Temps {
     return forecastList?.reduce<Temps>((temps, forecast) => {
       const forecastDate = this.formatForecastDate(new Date(forecast.dt_txt));
-      const temp = this.convertKelvinToCelsius(
+      const temp = this.convertKelvinToUnit(
         type === 'max' ? forecast.main.temp_max : forecast.main.temp_min
       );
 
@@ -87,7 +105,7 @@ export class ForecastComponent implements OnChanges {
         temp,
       };
 
-    // console.log('SIMPLE FORECASTS', this.simpleForecasts);
+      // console.log('SIMPLE FORECASTS', this.simpleForecasts);
       if (
         !temps[forecastDate] ||
         (type === 'max'
@@ -105,7 +123,7 @@ export class ForecastComponent implements OnChanges {
     return date.getDate().toString().padStart(2, '0');
   }
 
-  private formatHour(date: Date): string { 
+  private formatHour(date: Date): string {
     return date.getHours().toString().padStart(2, '0');
   }
 
@@ -120,5 +138,15 @@ export class ForecastComponent implements OnChanges {
 
   private convertKelvinToCelsius(kelvin: number): number {
     return Math.round(kelvin - 273.15);
+  }
+
+  private convertKelvinToFahrenheit(kelvin: number): number {
+    return Math.round((kelvin - 273.15) * (9 / 5) + 32);
+  }
+
+  private convertKelvinToUnit(kelvin: number): number {
+    return this.currentUnit === 'C'
+      ? this.convertKelvinToCelsius(kelvin)
+      : this.convertKelvinToFahrenheit(kelvin);
   }
 }

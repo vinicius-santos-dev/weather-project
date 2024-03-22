@@ -13,7 +13,7 @@
       />
       <div class="c-current-weather__highlighted-texts">
         <h2 class="c-current-weather__highlighted-title">
-          {{ temperatures.currentTemp }} °C
+          {{ temperatures.currentTemp }} °{{ currentUnit }}
         </h2>
         <p class="c-current-weather__highlighted-subtitle">
           {{ city.weather[0].main }}
@@ -23,8 +23,8 @@
 
     <div class="c-current-weather__other-temps">
       <p class="c-current-weather__other-temps-info">
-        {{ temperatures.maxTemp }} °C / {{ temperatures.minTemp }} °C 
-        (Feels like {{ temperatures.feelsLike }} °C)
+        {{ temperatures.maxTemp }} °{{ currentUnit }} / {{ temperatures.minTemp }} °{{ currentUnit }} 
+        (Feels like {{ temperatures.feelsLike }} °{{ currentUnit }})
       </p>
     </div>
 
