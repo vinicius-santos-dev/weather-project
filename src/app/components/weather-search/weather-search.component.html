@@ -11,6 +11,7 @@
     <button
       [disabled]="!searchForm.valid || isLoading"
       class="c-weather-search__button"
+      aria-label="Search"
       (click)="onSubmit()"
     >
       <i class="uil uil-search"></i>

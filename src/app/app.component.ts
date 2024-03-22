@@ -10,12 +10,12 @@ import { WeatherComponent } from './components';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  public backgroundImage = 'url(../assets/images/backgrounds/clear.jpg)';
+  public backgroundImage = 'url(../assets/images/backgrounds/clear.webp)';
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   public onWeatherChange(weather: string): void {
-    this.backgroundImage = `url(../assets/images/backgrounds/${weather}.jpg)`;
+    this.backgroundImage = `url(../assets/images/backgrounds/${weather}.webp)`;
     this.changeDetectorRef.detectChanges();
   }
 }

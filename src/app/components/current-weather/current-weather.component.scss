@@ -47,12 +47,6 @@
     &-subtitle {
       margin-bottom: 0;
     }
-
-    img {
-      @include mq($until: tablet) {
-        height: 90px;
-      }
-    }
   }
 
   &__other-temps {
