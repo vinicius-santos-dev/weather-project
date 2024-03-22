@@ -8,11 +8,12 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { City } from '../../models';
+import { TemperatureUnitComponent } from '../temperature-unit/temperature-unit.component';
 
 @Component({
   selector: 'app-current-weather',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TemperatureUnitComponent],
   templateUrl: './current-weather.component.html',
   styleUrl: './current-weather.component.scss',
 })

@@ -1,0 +1,33 @@
+@import "../../../styles.scss";
+
+.c-temperature-unit {
+  display: flex;
+
+  &__button {
+    padding: $global-spacing-unit-tiny $global-spacing-unit-small;
+    cursor: pointer;
+    border: none;
+    flex: 1;
+    background: rgba(0, 0, 0, 30%);
+    font-family: $global-body-font;
+    font-size: $font-size-xs;
+    width: 45px;
+    color: $color-neutral-lightest;
+    font-weight: $font-weight-bold;
+
+    &:first-child {
+      border-top-left-radius: $border-radius-md;
+      border-bottom-left-radius: $border-radius-md;
+    }
+
+    &:last-child {
+      border-top-right-radius: $border-radius-md;
+      border-bottom-right-radius: $border-radius-md;
+    }
+
+    &--active {
+      background: $color-neutral-lightest;
+      color: $color-neutral-darkest;
+    }
+  }
+}

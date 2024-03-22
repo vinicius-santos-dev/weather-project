@@ -1,0 +1,12 @@
+<div class="c-temperature-unit">
+  @for(temperatureUnit of temperatureUnits; track $index) {
+
+  <button
+    class="c-temperature-unit__button"
+    [class.c-temperature-unit__button--active]="currentUnit === temperatureUnit.unit"
+    (click)="changeTemperatureUnit(temperatureUnit.unit)"
+  >
+    °{{ temperatureUnit.unit }}
+  </button>
+  }
+</div>

@@ -1,6 +1,9 @@
 <div class="c-current-weather">
   @if(city && city.main) {
-  <h1 class="c-current-weather__title">{{ city.name }}</h1>
+    <div class="c-current-weather__header">
+      <h1 class="c-current-weather__title">{{ city.name }}</h1>
+      <app-temperature-unit></app-temperature-unit>
+    </div>
 
   <div class="c-current-weather__info">
     <div class="c-current-weather__highlighted">
