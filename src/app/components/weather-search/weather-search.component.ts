@@ -12,6 +12,7 @@ import { WeatherService } from '../../services/weather.service';
 import { finalize, switchMap, takeUntil } from 'rxjs';
 import { UnsubscribeMixin } from '../../mixins';
 import { City, Forecast } from '../../models';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-weather-search',
@@ -47,6 +48,8 @@ export class WeatherSearchComponent extends UnsubscribeMixin implements OnInit {
   }
 
   private getWeather(city?: string) {
+    const params = new HttpParams().set('cacheBuster', Date.now().toString());
+
     const location = (city ? city : this.searchForm.value.location)
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
@@ -55,7 +58,7 @@ export class WeatherSearchComponent extends UnsubscribeMixin implements OnInit {
     this.isLoadingEmitter.emit(this.isLoading);
 
     this.weatherService
-      .getWeather(location)
+      .getWeather(location, { params })
       .pipe(
         takeUntil(this.unsubscribe$),
         switchMap((weatherResponse) => {
@@ -63,7 +66,9 @@ export class WeatherSearchComponent extends UnsubscribeMixin implements OnInit {
 
           this.cityEmitter.emit(weatherResponse);
 
-          return this.weatherService.getForecast(weatherResponse.id);
+          return this.weatherService.getForecast(weatherResponse.id, {
+            params,
+          });
         }),
         finalize(() => {
           this.isLoading = false;

@@ -68,6 +68,9 @@ export class ForecastComponent
     const maxTemps = this.calculateTemps(forecastList, 'max');
     const minTemps = this.calculateTemps(forecastList, 'min');
 
+    // console.log('MAX TEMPS: ', maxTemps);
+    // console.log('MIN TEMPS: ', minTemps);
+
     this.setSimpleForecasts(maxTemps, minTemps);
 
     // console.log(this.simpleForecasts);
