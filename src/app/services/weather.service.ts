@@ -3,16 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { City, Forecast } from '../models';
 import { environment } from '../../environments/environment';
-import { AppConfig } from '../app.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
   private baseUrl = 'https://api.openweathermap.org/data/2.5';
-  private apiKey = this.appConfig.config.apiKey;
+  private apiKey = environment.WEATHER_API_KEY;
 
-  constructor(private http: HttpClient, private appConfig: AppConfig) {}
+  constructor(private http: HttpClient) {}
 
   public getWeather(
     location: string,

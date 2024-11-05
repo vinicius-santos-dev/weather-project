@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    WEATHER_API_KEY: process.env['NG_APP_API_KEY'] || 'default_key',
+    WEATHER_API_KEY: 'f926545ae2f5080cd7f38765b067111b'
 };
