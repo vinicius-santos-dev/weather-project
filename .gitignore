@@ -43,3 +43,5 @@ Thumbs.db
 
 environment.development.ts
 environment.production.ts
+
+.env

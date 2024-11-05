@@ -4,12 +4,13 @@ import { Observable, map } from 'rxjs';
 import { City, Forecast } from '../models';
 import { environment } from '../../environments/environment';
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
   private baseUrl = 'https://api.openweathermap.org/data/2.5';
-  private apiKey = environment.WEATHER_API_KEY;
+  private apiKey: string = environment.WEATHER_API_KEY;
 
   constructor(private http: HttpClient) {}
 
