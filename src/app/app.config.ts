@@ -13,9 +13,9 @@ export class AppConfig {
 
   loadConfig() {
     this._config = {
-      // apiKey: environment.WEATHER_API_KEY
-      apiKey: process.env['NG_APP_API_KEY'] || 'default_value'
+      apiKey: environment.WEATHER_API_KEY
     };
+    // apiKey: process.env['NG_APP_API_KEY'] || 'default_value'
     return Promise.resolve();
   }
 
