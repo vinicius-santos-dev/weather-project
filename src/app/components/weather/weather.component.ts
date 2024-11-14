@@ -5,6 +5,10 @@ import { CurrentWeatherComponent } from '../current-weather/current-weather.comp
 import { ForecastComponent } from '../forecast/forecast.component';
 import { City, Forecast } from '../../models';
 
+/**
+ * Main weather component that orchestrates weather-related child components
+ * and handles their communications
+ */
 @Component({
   selector: 'app-weather',
   standalone: true,

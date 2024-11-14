@@ -4,7 +4,11 @@ import { Observable, map } from 'rxjs';
 import { City, Forecast } from '../models';
 import { environment } from '../../environments/environment';
 
-
+/**
+ * Service handling OpenWeather API interactions:
+ * - Current weather data
+ * - 5-day forecast data
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -14,6 +18,11 @@ export class WeatherService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Fetches current weather for given location
+   * @param location City name
+   * @param options Optional HTTP parameters (e.g. cache busting)
+   */
   public getWeather(
     location: string,
     options?: { params: HttpParams }
@@ -26,6 +35,12 @@ export class WeatherService {
       .pipe(map((response) => response as City));
   }
 
+
+  /**
+   * Fetches 5-day forecast using city ID
+   * @param id City ID from weather response
+   * @param options Optional HTTP parameters
+   */
   public getForecast(
     id: number,
     options?: { params: HttpParams }

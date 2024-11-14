@@ -12,6 +12,13 @@ import { TemperatureUnitService } from '../../services/temperature-unit.service'
 import { UnsubscribeMixin } from '../../mixins';
 import { takeUntil } from 'rxjs';
 
+/**
+ * Handles forecast data processing:
+ * - Aggregates min/max temperatures per day
+ * - Converts between temperature units (K → C/F)
+ * - Formats dates for display
+ * - Tracks extreme temperatures
+ */
 @Component({
   selector: 'app-forecast',
   standalone: true,
@@ -68,12 +75,7 @@ export class ForecastComponent
     const maxTemps = this.calculateTemps(forecastList, 'max');
     const minTemps = this.calculateTemps(forecastList, 'min');
 
-    // console.log('MAX TEMPS: ', maxTemps);
-    // console.log('MIN TEMPS: ', minTemps);
-
     this.setSimpleForecasts(maxTemps, minTemps);
-
-    // console.log(this.simpleForecasts);
   }
 
   public setSimpleForecasts(maxTemps: Temps, minTemps: Temps): void {
@@ -96,6 +98,7 @@ export class ForecastComponent
     forecastList: GeneralInfo[],
     type: 'max' | 'min'
   ): Temps {
+    // Reduce forecast list into object with date keys and temperature info
     return forecastList?.reduce<Temps>((temps, forecast) => {
       const forecastDate = this.formatForecastDate(new Date(forecast.dt_txt));
       const temp = this.convertKelvinToUnit(
@@ -108,7 +111,7 @@ export class ForecastComponent
         temp,
       };
 
-      // console.log('SIMPLE FORECASTS', this.simpleForecasts);
+      // Only update if no existing temp for date or if new temp is more extreme
       if (
         !temps[forecastDate] ||
         (type === 'max'
@@ -122,6 +125,7 @@ export class ForecastComponent
     }, {});
   }
 
+  // Date formatting utilities
   private formatDate(date: Date): string {
     return date.getDate().toString().padStart(2, '0');
   }
@@ -130,6 +134,9 @@ export class ForecastComponent
     return date.getHours().toString().padStart(2, '0');
   }
 
+  /**
+ * Formats date as "DD MMM, DDD" (e.g. "15 Jan, Mon")
+ */
   private formatForecastDate(date: Date): string {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const day = days[date.getDay()];
@@ -147,6 +154,7 @@ export class ForecastComponent
     return Math.round((kelvin - 273.15) * (9 / 5) + 32);
   }
 
+  // Temperature conversion utilities 
   private convertKelvinToUnit(kelvin: number): number {
     return this.currentUnit === 'C'
       ? this.convertKelvinToCelsius(kelvin)

@@ -14,6 +14,9 @@ import { UnsubscribeMixin } from '../../mixins';
 import { TemperatureUnitService } from '../../services/temperature-unit.service';
 import { takeUntil } from 'rxjs';
 
+/**
+ * Displays current weather information and handles temperature unit conversions
+ */
 @Component({
   selector: 'app-current-weather',
   standalone: true,

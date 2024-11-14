@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+/**
+ * Service for managing temperature unit preferences (Celsius/Fahrenheit)
+ * Provides global state and conversions between units
+ */
 @Injectable({
   providedIn: 'root',
 })

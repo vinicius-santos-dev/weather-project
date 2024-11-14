@@ -14,6 +14,13 @@ import { UnsubscribeMixin } from '../../mixins';
 import { City, Forecast } from '../../models';
 import { HttpParams } from '@angular/common/http';
 
+/**
+ * Core weather search component that:
+ * - Handles API interactions with weatherService
+ * - Manages loading states
+ * - Normalizes city names removing diacritics
+ * - Emits weather/forecast data to parent
+ */
 @Component({
   selector: 'app-weather-search',
   standalone: true,
@@ -47,9 +54,14 @@ export class WeatherSearchComponent extends UnsubscribeMixin implements OnInit {
     }
   }
 
+  /**
+ * Fetch weather data for given city or form input
+ * @param city Optional city parameter, defaults to form value
+ */
   private getWeather(city?: string) {
     const params = new HttpParams().set('cacheBuster', Date.now().toString());
 
+    // Normalize location string to remove diacritical marks for API compatibility
     const location = (city ? city : this.searchForm.value.location)
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
@@ -62,8 +74,6 @@ export class WeatherSearchComponent extends UnsubscribeMixin implements OnInit {
       .pipe(
         takeUntil(this.unsubscribe$),
         switchMap((weatherResponse) => {
-          // console.log('WEATHER RESPONSE: ', weatherResponse);
-
           this.cityEmitter.emit(weatherResponse);
 
           return this.weatherService.getForecast(weatherResponse.id, {
@@ -77,8 +87,6 @@ export class WeatherSearchComponent extends UnsubscribeMixin implements OnInit {
       )
       .subscribe({
         next: (forecastResponse) => {
-          // console.log('FORECAST RESPONSE: ', forecastResponse);
-
           this.forecastEmitter.emit(forecastResponse);
         },
         error: (err) => {

@@ -2,6 +2,9 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { WeatherComponent } from './components';
 
+/**
+ * Root component that handles app-wide background changes based on weather
+ */
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,6 +17,7 @@ export class AppComponent {
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
+  // Updates background image when weather changes and forces view refresh
   public onWeatherChange(weather: string): void {
     this.backgroundImage = `url(../assets/images/backgrounds/${weather}.webp)`;
     this.changeDetectorRef.detectChanges();
