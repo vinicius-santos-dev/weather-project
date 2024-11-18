@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { WeatherComponent } from './components';
 
 /**
@@ -8,7 +7,7 @@ import { WeatherComponent } from './components';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, WeatherComponent],
+  imports: [WeatherComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
