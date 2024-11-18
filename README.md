@@ -1,27 +1,91 @@
-# WeatherProject
+# Weather App 🌦️
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.1.
+A weather application built with Angular 17 that provides real-time weather data and forecasts. <br />
+Features a clean UI with dynamic backgrounds that change based on current weather conditions.
 
-## Development server
+<img src="https://github.com/user-attachments/assets/6719d718-21c6-477f-8d63-34356257ff5e" alt="weather-app" width="700">
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## ✨ Key Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- 🌡️ Real-time weather conditions for any city worldwide
+- 📅 5-day weather forecast with temperature trends
+- 🔄 Temperature unit switching (Celsius/Fahrenheit)
+- 🎨 Dynamic backgrounds reflecting current weather
+- 📱 Fully responsive design for all devices
 
-## Build
+## 🛠️ Technical Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Frontend
 
-## Running unit tests
+- Angular 17
+- TypeScript
+- RxJS
+- Angular Material
+- SCSS
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### APIs & Services
 
-## Running end-to-end tests
+- OpenWeatherMap API
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Infrastructure
 
-## Further help
+- Vercel (Hosting & Analytics)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 🌟 Core Functionalities
+
+- Real-time weather data fetching
+- Temperature unit conversion
+- Dynamic weather-based UI theming
+- City search
+- 5-day forecast display
+
+## 🚀 Getting Started
+
+1. Clone the repository:
+
+```
+git clone https://github.com/vinicius-santos-dev/weather-project.git
+```
+
+2. Install dependencies:
+
+```
+npm install
+```
+
+3. Create .env file and add your OpenWeatherMap API key:
+
+```
+WEATHER_API_KEY=your_api_key_here
+```
+
+4. Start the development server:
+
+```
+npm start
+```
+
+## 🎯 Project Structure
+
+```
+src/
+├── app/
+│   ├── components/     # UI components
+│   ├── services/      # Weather services
+│   ├── models/        # TypeScript interfaces
+│   └── mixins/        # Shared mixins
+├── assets/           # Static files
+└── environments/     # Environment configs
+```
+
+## 🔗 Live Demo
+
+Check out the live demo: [Weather App](https://viniciusdev-weather.vercel.app)
+
+## 📫 Contact
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vinicius-santos-dev)
+[![Portfolio](https://img.shields.io/badge/Portfolio-470FA3?style=for-the-badge&logo=About.me&logoColor=white)](https://www.viniciussantos.dev)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://api.whatsapp.com/send?phone=5511984375850)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:vinicius.ssantos.dev@gmail.com)
